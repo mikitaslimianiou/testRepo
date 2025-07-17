@@ -1,0 +1,48 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: test-user
+      POSTGRES_PASSWORD: 123456789
+      POSTGRES_DB: test-db
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+
+  web:
+    build: ./app
+    environment:
+      DATABASE_URL: postgres://test-user:123456789@db:5432/test-db
+      AUTH0_SECRET: 123456789
+      AUTH0_CLIENT_ID: DvWcObmJoOYPauNybllN1x1AdjG78TpE
+      AUTH0_CLIENT_SECRET: La2DYBJ_OofhYybPHcuPke0fhZbd2NK8s5WzVDinonNEcoecdOTTgiqbWBBJDYM_
+      AUTH0_ISSUER_BASE_URL: https://dev-x46b7poxlc5o0huq.us.auth0.com
+      BASE_URL: https://app.corespace.sbs
+    depends_on:
+      - db
+
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./certs:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+      - ./init.sh:/init.sh
+    environment:
+      - DOMAIN=app.corespace.sbs
+    entrypoint: ["/bin/sh", "/init.sh"]
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - web
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./certs:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+      - ./certbot-init.sh:/certbot-init.sh
+    environment:
+      - DOMAIN=app.corespace.sbs
+      - EMAIL=slin.lssoft.net@gmail.com
+    entrypoint: ["/bin/sh", "/certbot-init.sh"]
