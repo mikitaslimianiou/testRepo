@@ -2,12 +2,12 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /absolute path to your app
+    destination: /testRepo/app/index.js
     overwrite: yes
     exclude:
       - app/**
 permissions:
-  - object: /absolute path to your app
+  - object: /testRepo/app/index.js
     pattern: "**"
     owner: ec2-user
     group: ec2-user
