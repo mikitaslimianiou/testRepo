@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-cd /absolute path to your app
+cd /testRepo/app/index.js
 
 docker compose up -d
 
