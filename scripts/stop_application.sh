@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-cd /absolute path to your app
+cd /testRepo/app/index.js
 
 # Run docker compose down, ignore errors if not running
 docker compose down || true
