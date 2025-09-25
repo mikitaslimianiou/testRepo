@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-cd /testRepo/app/index.js
+cd /testRepo/app
 
 docker compose up -d
 
