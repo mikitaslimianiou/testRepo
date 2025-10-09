@@ -7,6 +7,7 @@ files:
     exclude:
       - app/**
       - db_data/**
+      - certs/**
 permissions:
   - object: /testRepo/app
     pattern: "**"
