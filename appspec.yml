@@ -6,6 +6,7 @@ files:
     overwrite: yes
     exclude:
       - app/**
+      - db_data/**
 permissions:
   - object: /testRepo/app
     pattern: "**"
