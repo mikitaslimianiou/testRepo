@@ -9,7 +9,7 @@ services:
       - ./db_data:/var/lib/postgresql/data
 
   web:
-    build: ./app
+    image: 124355683173.dkr.ecr.us-east-1.amazonaws.com/testspase/testrepo:latest
     environment:
       DATABASE_URL: postgres://test-user:123456789@db:5432/test-db
       AUTH0_SECRET: 123456789
