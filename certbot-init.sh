@@ -29,8 +29,7 @@ fi
 echo "Attempting to obtain real certificates..."
 certbot certonly --webroot -w /var/www/certbot \
   --email "$EMAIL" --agree-tos --no-eff-email \
-  -d "$DOMAIN" \
-  --force-renewal
+  -d "$DOMAIN"
 
 echo "Certificate process completed!"
 echo "Remember to reload Nginx manually with: docker-compose exec nginx nginx -s reload"
